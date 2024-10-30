@@ -95,7 +95,7 @@ def test_empty_user_data() -> None:
     assert len(valid_users) == 0  # No valid users should be present
     assert len(active_users) == 0  # No active users should be present
 
-
+#df
 def test_duplicate_user_data() -> None:
     """
     Tests that validate_users correctly handles duplicate user data.
