@@ -1,0 +1,13 @@
+name: Python CI/CD
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/basic-ci.yaml"
+      - "basic-ci/**"
+
+env:
+  REGISTRY: ghcr.io
+  
+# jobs: ...
