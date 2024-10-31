@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-deployment
+  namespace: woochan2756
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastapi
+  template:
+    metadata:
+      labels:
+        app: fastapi
+    spec:
+      containers:
+      - name: fastapi
+        image: ghcr.io/woochan2756/my_ci:latest  # GHCR 이미지 경로
+        ports:
+        - containerPort: 8000
+      imagePullSecrets:
+      - name: eyJhdXRocyI6eyJnaGNyLmlvIjp7InVzZXJuYW1lIjoid29vY2hhbjI3NTYiLCJwYXNzd29yZCI6ImdocF9oN2pNbHJmVUR0V2piS3BmbUJLQmJyOHJodVJXRlYyaThkeloiLCJlbWFpbCI6Indvb2NoYW4yNzU2QGdtYWlsLmNvbSIsImF1dGgiOiJkMjl2WTJoaGJqSTNOVFk2WjJod1gyZzNhazFzY21aVlJIUlhhbUpMY0dadFFrdENZbkk0Y21oMVVsZEdWakpwT0dSNldnPT0ifX19  # 생성한 ImagePullSecret 참조
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fastapi-service
+  namespace: woochan2756
+spec:
+  selector:
+    app: fastapi
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+      nodePort: 31177  # NodePort 직접 지정 (예시)
+  type: NodePort
